@@ -1,7 +1,11 @@
 {
   "name": "vue-plantt",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.0.1",
+  "description": "Vue.js version of Plantt : a scheduler component displayed on a timeline.",
+  "main": "public/index.html",
+  "repository": "git@github.com:polosson/vue-plantt.git",
+  "author": "Polosson <polo@polosson.com>",
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
