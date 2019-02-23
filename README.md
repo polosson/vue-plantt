@@ -1,34 +1,29 @@
 # vue-plantt
 
-## Project setup
-```
-yarn install
-```
+Plantt is a daily scheduler displayed on a timeline. This repository is the [Vue.js](https://vuejs.org/) version of the component.
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+_Note: this component is also [available for Angular (v1)](https://github.com/polosson/plantt)_
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+## Features
 
-### Run your tests
-```
-yarn run test
-```
+This Vue.js component takes a **list** of "events" (i.e. items defined in time by a start date and an end date) and display them on a daily (or hourly) timeline.
 
-### Lints and fixes files
-```
-yarn run lint
-```
+Among many other features (see below), you can drag & drop them to redefine their dates.
 
-### Run your unit tests
-```
-yarn run test:unit
-```
+### Interface
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+_Description TODO._
+
+### Available interactions
+
+_Description TODO._
+
+## Licence
+
+[MIT Licence](LICENSE).
+
+You can use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the software, at the condition you include this copyright notice and a copy of the permission notice.
+
+Copyright © Polosson 2019-present.
+
+Have fun ! :)
