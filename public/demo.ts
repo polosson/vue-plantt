@@ -1,9 +1,11 @@
 import './demo.scss';
 import Vue from 'vue';
-import Plantt from '../src/plantt.vue';
+
+// @ts-ignore
+import Calendar from './components/Calendar';
 
 Vue.config.productionTip = false;
 
 new Vue({
-    render: h => h(Plantt),
+    render: h => h(Calendar),
 }).$mount('#plantt-demo');
