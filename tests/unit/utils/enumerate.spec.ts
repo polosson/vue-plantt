@@ -4,7 +4,7 @@ import { DateRange } from 'moment-range';
 import {
     enumerateMonths,
     enumerateDays,
-    enumerateHours
+    enumerateHours,
 } from '@/utils/enumerate';
 
 describe('enumerateMonths', () => {
@@ -38,7 +38,7 @@ describe('enumerateDays', () => {
             labelShort: '01/01',
             labelLong: 'Tuesday 01 January',
             nbEvents: 0,
-            today: false,
+            isToday: false,
             isLastOfMonth: false,
         });
         expect(enumDays[30]).toEqual({
@@ -50,7 +50,7 @@ describe('enumerateDays', () => {
             labelShort: '31/01',
             labelLong: 'Thursday 31 January',
             nbEvents: 0,
-            today: false,
+            isToday: false,
             isLastOfMonth: true,
         });
     });
