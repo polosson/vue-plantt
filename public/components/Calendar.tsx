@@ -34,7 +34,12 @@ class Calendar extends Vue {
 
         return (
             <div class="Calendar">
-                <Plantt events={events} viewDates={viewDates} />
+                <Plantt
+                    events={events}
+                    viewDates={viewDates}
+                    gridWidth={1463}
+                    linesCount={8}
+                />
                 <button onClick={this.handleClickAddEvent}>ADD EVENT</button>
             </div>
         );

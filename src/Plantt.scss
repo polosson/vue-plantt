@@ -24,14 +24,12 @@
     }
 
     &__monthsLine {
-        th {
-            border: none;
-            box-shadow: inset -3px 0 3px -3px $border-color-calendar-cell-lastOfMonth;
-            font-size: 1.2em;
-            padding: 5px 0 8px 0;
+        border: none;
+        box-shadow: inset -3px 0 3px -3px $border-color-calendar-cell-lastOfMonth;
+        font-size: 1.2em;
+        padding: 5px 0 8px 0;
 
-            &:last-of-type { box-shadow: none; }
-        }
+        &:last-of-type { box-shadow: none; }
     }
 
     &__daysLine {

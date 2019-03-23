@@ -8651,7 +8651,7 @@ send@0.16.2:
     range-parser "~1.2.0"
     statuses "~1.4.0"
 
-serialize-javascript@^1.4.0:
+serialize-javascript@^1.4.0, serialize-javascript@^1.5.0:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/serialize-javascript/-/serialize-javascript-1.6.1.tgz#4d1f697ec49429a847ca6f442a2a755126c4d879"
   integrity sha512-A5MOagrPFga4YaKQSWHryl7AXvbQkEqpw4NNYMTNYUNV51bA8ABHgYFpqKx+YFFrw59xMV1qGH1R4AgoNIVgCw==
@@ -9853,6 +9853,11 @@ vue-class-component@^7.0.1:
   resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.0.1.tgz#7af2225c600667c7042b60712eefdf41dfc6de63"
   integrity sha512-YIihdl7YmceEOjSwcxLhCXCNA3TKC2FStuMcjtuzhUAgw5x5d1T5gZTmVQHGyOaQsaKffL4GlZzYN3dlMYl53w==
 
+vue-cli-plugin-tsx-support@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/vue-cli-plugin-tsx-support/-/vue-cli-plugin-tsx-support-0.3.0.tgz#11730bee5f1505e2a850903479b5a8865fee7fae"
+  integrity sha512-ZET7uYINKihF/tov6ekHThn4q1+EGke6d1N6Q46HwCsjMiyZWdPxZP1tm2OP6nfWr+eDGLvYciyVjw27uZytsg==
+
 vue-eslint-parser@^2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-2.0.3.tgz#c268c96c6d94cfe3d938a5f7593959b0ca3360d1"
@@ -9898,6 +9903,15 @@ vue-jest@^3.0.3:
     tsconfig "^7.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
+vue-jsx-hot-loader@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/vue-jsx-hot-loader/-/vue-jsx-hot-loader-1.4.0.tgz#38014b6cac81bdc290f16ca1f4e0e68306542bd8"
+  integrity sha512-RaoRH3Et4DGhvO5hl+xHQY42PmUd4ECe+L0F/aB7uN4PZhq57LpjdxpWi/9eODZ+FhAA3hpH+oBwzy8zKJaYmg==
+  dependencies:
+    hash-sum "^1.0.2"
+    lodash "^4.17.10"
+    serialize-javascript "^1.5.0"
+
 vue-loader@^15.6.4:
   version "15.7.0"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-15.7.0.tgz#27275aa5a3ef4958c5379c006dd1436ad04b25b3"
@@ -9936,6 +9950,11 @@ vue-template-es2015-compiler@^1.6.0, vue-template-es2015-compiler@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha512-4gDntzrifFnCEvyoO8PqyJDmguXgVPxKiIxrBKjIowvL9l+N66196+72XVYR8BBf1Uv1Fgt3bGevJ+sEmxfZzw==
+
+vue-tsx-support@^2.1.1:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/vue-tsx-support/-/vue-tsx-support-2.2.2.tgz#318f6dd25e5f1ee451a7bc5bcb4669eb7810460c"
+  integrity sha512-VykX5OnMYUCyJje7Ke2cVMk0c22eCzuyCQjchRsMpRg72SLZ0eDicT4oTZTJRGAHJ/7TDV+Pwtnpt+LHVr62jg==
 
 vue@^2.6.9:
   version "2.6.10"

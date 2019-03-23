@@ -1,7 +1,8 @@
 import * as MomentBase from 'moment';
 import classnames from 'classnames';
 import { extendMoment } from 'moment-range';
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import * as tsx from 'vue-tsx-support';
+import { Component, Prop } from 'vue-property-decorator';
 
 import './Plantt.scss';
 
@@ -49,17 +50,36 @@ type Grid = {
     height: number,
 };
 
+interface PlanttProps {
+    events: PlanttEvent[],
+    viewDates: ViewDates,
+    gridWidth: number,
+    linesCount?: number,
+    useHours?: boolean,
+    dayStartHour?: number,
+    dayEndHour?: number,
+    minCellWidthForDays?: number,
+    minCellWidthForHours?: number,
+    eventHeight?: number,
+    eventMargin?: number,
+    useLock?: boolean,
+    autoLock?: boolean,
+    lockMarginDays?: number,
+}
+
 type LineFill = (string | boolean)[];
 
 const Moment = extendMoment(MomentBase);
 
 @Component
-class Plantt extends Vue {
+class Plantt extends tsx.Component<PlanttProps> {
     @Prop() events!: PlanttEvent[];
 
     @Prop() viewDates!: ViewDates;
 
-    @Prop({ default: 1480 }) readonly gridWidth!: number;
+    @Prop() readonly gridWidth!: number;
+
+    @Prop({ default: 6 }) readonly linesCount!: number;
 
     @Prop({ default: false }) readonly useHours!: boolean;
 
@@ -78,8 +98,6 @@ class Plantt extends Vue {
     @Prop({ default: true }) readonly useLock!: boolean;
 
     @Prop({ default: true }) readonly autoLock!: boolean;
-
-    @Prop({ default: 6 }) readonly linesCount!: number;
 
     @Prop({ default: 2 }) readonly lockMarginDays!: number;
 
@@ -125,18 +143,18 @@ class Plantt extends Vue {
         return (
             <table class="Plantt__grid">
                 <thead>
-                    <tr class="Plantt__monthsLine">
+                    <tr>
                         {months.map(month => (
                             <th
                                 key={month.num}
                                 colspan={month.numberOfDays}
-                                class="Plantt__month"
+                                class="Plantt__monthLine"
                             >
                                 {month.name}
                             </th>
                         ))}
                     </tr>
-                    <tr class="Plantt__daysLine">
+                    <tr>
                         {days.map(this.renderGridDay)}
                     </tr>
                 </thead>
@@ -194,7 +212,7 @@ class Plantt extends Vue {
         return (
             <table class="Plantt__hoursLine">
                 <thead>
-                    <tr class="Plantt__hoursLine__hour" height={height - 40}>
+                    <tr style={{ height: height - 40 }}>
                         {hours.map(hour => (
                             <th
                                 key={hour.num}
