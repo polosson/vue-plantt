@@ -363,7 +363,7 @@ class Plantt extends tsx.Component<PlanttProps> {
                 return;
             }
 
-            // eventDay.nbEvents += 1; ATTENTION MUTATION !!!!!!!!!!!!!!!!!!!!!!!
+            // eventDay.nbEvents += 1; // WARNING: MUTATION which causes an infinite loop!!!
 
             let dayFilled = false;
             this.linesFill.forEach((thisLine, numLine) => {
@@ -371,8 +371,9 @@ class Plantt extends tsx.Component<PlanttProps> {
                 if (!isEmptyLine || dayFilled) {
                     return;
                 }
-                line = Math.max(line || 0, numLine - 1);
-                this.linesFill[line + 1][eventDay.offset] = `${eventDay.num}: ${name}`;
+
+                line = Math.max(line, numLine);
+                this.linesFill[line][eventDay.offset] = `${eventDay.num}: ${name}`;
                 dayFilled = true;
             });
         });
