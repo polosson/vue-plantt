@@ -1,6 +1,6 @@
 {
   "name": "vue-plantt",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Vue.js version of Plantt : a scheduler component displayed on a timeline.",
   "main": "dist/index.js",
   "repository": "git@github.com:polosson/vue-plantt.git",
