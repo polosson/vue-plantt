@@ -1,4 +1,4 @@
-### 0.1.1 (2019-03-23)
+### 0.1.2 (2019-03-23)
 
 First (almost) stable release, which is basically the retrieved code from Robert2-client, just adapted to Typescript and TSX.
 
