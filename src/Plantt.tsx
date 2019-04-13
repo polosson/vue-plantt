@@ -2,6 +2,7 @@ import * as MomentBase from 'moment';
 import classnames from 'classnames';
 import { extendMoment } from 'moment-range';
 import * as tsx from 'vue-tsx-support';
+import 'vue-tsx-support/enable-check';
 import { Component, Prop } from 'vue-property-decorator';
 
 import './Plantt.scss';
