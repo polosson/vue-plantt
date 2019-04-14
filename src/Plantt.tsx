@@ -24,11 +24,6 @@ export interface PlanttEvent {
     type: string,
 }
 
-export interface ViewDates {
-    start: MomentBase.Moment,
-    end: MomentBase.Moment,
-}
-
 interface PlanttRenderEvent extends PlanttEvent {
     title: string,
     line: number,
@@ -53,7 +48,8 @@ type Grid = {
 
 interface PlanttProps {
     events: PlanttEvent[],
-    viewDates: ViewDates,
+    viewStart: MomentBase.Moment,
+    viewEnd: MomentBase.Moment,
     gridWidth: number,
     linesCount?: number,
     useHours?: boolean,
@@ -76,7 +72,9 @@ const Moment = extendMoment(MomentBase);
 class Plantt extends tsx.Component<PlanttProps> {
     @Prop() events!: PlanttEvent[];
 
-    @Prop() viewDates!: ViewDates;
+    @Prop() viewStart!: MomentBase.Moment;
+
+    @Prop() viewEnd!: MomentBase.Moment;
 
     @Prop() readonly gridWidth!: number;
 
@@ -102,9 +100,9 @@ class Plantt extends tsx.Component<PlanttProps> {
 
     @Prop({ default: 2 }) readonly lockMarginDays!: number;
 
-    private viewStart: MomentBase.Moment;
+    private viewStartDate: MomentBase.Moment;
 
-    private viewEnd: MomentBase.Moment;
+    private viewEndDate: MomentBase.Moment;
 
     private grid: Grid;
 
@@ -113,10 +111,10 @@ class Plantt extends tsx.Component<PlanttProps> {
     constructor() {
         super();
 
-        this.viewStart = Moment(this.viewDates.start).startOf('day');
-        this.viewEnd = Moment(this.viewDates.end).endOf('day');
+        this.viewStartDate = this.viewStart.startOf('day');
+        this.viewEndDate = this.viewEnd.endOf('day');
 
-        const daysRange = Moment.range(this.viewStart, this.viewEnd);
+        const daysRange = Moment.range(this.viewStartDate, this.viewEndDate);
 
         const lines = [...Array(this.linesCount)];
         this.linesFill = lines.map(_ => Array.from(daysRange.by('day')).map(() => false));
@@ -285,7 +283,7 @@ class Plantt extends tsx.Component<PlanttProps> {
             name,
         } = event;
 
-        if (endDate.isBefore(this.viewStart, 'day') || startDate.isAfter(this.viewEnd, 'day')) {
+        if (endDate.isBefore(this.viewStartDate, 'day') || startDate.isAfter(this.viewEndDate, 'day')) {
             return undefined;
         }
 
@@ -296,7 +294,7 @@ class Plantt extends tsx.Component<PlanttProps> {
 
         const eventStartDay = Moment(startDate).startOf('day');
         const eventEndDay = Moment(endDate).endOf('day');
-        const offsetDays = Moment.range(this.viewStart, eventStartDay).diff('days', true);
+        const offsetDays = Moment.range(this.viewStartDate, eventStartDay).diff('days', true);
         const eventLength = Moment.range(eventStartDay, eventEndDay).diff('days', true);
 
         let offsetLeft = offsetDays * this.grid.dayCellsWidth;
@@ -308,8 +306,8 @@ class Plantt extends tsx.Component<PlanttProps> {
             daysExceed = -(offsetDays);
         }
 
-        if (endDate.isAfter(this.viewEnd)) {
-            daysExceed = Moment.range(this.viewEnd, endDate).diff('days', true);
+        if (endDate.isAfter(this.viewEndDate)) {
+            daysExceed = Moment.range(this.viewEndDate, endDate).diff('days', true);
         }
 
         const locked = (
@@ -320,7 +318,7 @@ class Plantt extends tsx.Component<PlanttProps> {
 
         const extraClasses = classnames(`timeline__event--${type}`, {
             'timeline__event--overLeft': offsetDays < 0,
-            'timeline__event--overRight': endDate.isAfter(this.viewEnd),
+            'timeline__event--overRight': endDate.isAfter(this.viewEndDate),
             'timeline__event--past': endDate.isBefore(Moment()),
             'timeline__event--locked': locked,
             'timeline__event--current': Moment().isBetween(startDate, endDate, 'hour'),
@@ -337,11 +335,11 @@ class Plantt extends tsx.Component<PlanttProps> {
             if (startDate.isSame(endDate, 'day')) {
                 eventWidth = this.grid.hourCellsWidth * (eventEndHour - eventStartHour);
             } else {
-                if (startDate.isBefore(this.viewStart, 'day')) {
+                if (startDate.isBefore(this.viewStartDate, 'day')) {
                     offsetLeft = 0;
                     eventWidth += offsetHours;
                 }
-                if (endDate.isAfter(this.viewEnd, 'day')) {
+                if (endDate.isAfter(this.viewEndDate, 'day')) {
                     daysExceed = Math.floor(daysExceed + 1);
                     eventWidth -= offsetHours;
                 } else {

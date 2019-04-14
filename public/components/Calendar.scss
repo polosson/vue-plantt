@@ -1,0 +1,24 @@
+.Calendar {
+    &__toolbar {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+
+        &__block {
+            flex: 1;
+        }
+    }
+
+    &__btn-prev,
+    &__btn-center,
+    &__btn-next,
+    &__btn-add {
+        margin-left: 5px;
+        padding: 7px 10px;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        background-color: #d74207;
+        color: #fff;
+    }
+}
