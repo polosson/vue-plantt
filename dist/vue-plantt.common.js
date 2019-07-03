@@ -21561,9 +21561,9 @@ function (_tsx$Component) {
 
     _this = _possibleConstructorReturn(this, getPrototypeOf_getPrototypeOf(Plantt).call(this));
     _this.linesFill = [];
-    _this.viewStart = Moment(_this.viewDates.start).startOf('day');
-    _this.viewEnd = Moment(_this.viewDates.end).endOf('day');
-    var daysRange = Moment.range(_this.viewStart, _this.viewEnd);
+    _this.viewStartDate = Moment(_this.viewStart).startOf('day');
+    _this.viewEndDate = Moment(_this.viewEnd).endOf('day');
+    var daysRange = Moment.range(_this.viewStartDate, _this.viewEndDate);
 
     var lines = _toConsumableArray(Array(_this.linesCount));
 
@@ -21714,7 +21714,7 @@ function (_tsx$Component) {
           type = event.type,
           name = event.name;
 
-      if (endDate.isBefore(this.viewStart, 'day') || startDate.isAfter(this.viewEnd, 'day')) {
+      if (endDate.isBefore(this.viewStartDate, 'day') || startDate.isAfter(this.viewEndDate, 'day')) {
         return undefined;
       }
 
@@ -21724,7 +21724,7 @@ function (_tsx$Component) {
       var title = "".concat(event.name, " (").concat(event.type, ")\n").concat(startTitle, " \u21D2 ").concat(endTitle);
       var eventStartDay = Moment(startDate).startOf('day');
       var eventEndDay = Moment(endDate).endOf('day');
-      var offsetDays = Moment.range(this.viewStart, eventStartDay).diff('days', true);
+      var offsetDays = Moment.range(this.viewStartDate, eventStartDay).diff('days', true);
       var eventLength = Moment.range(eventStartDay, eventEndDay).diff('days', true);
       var offsetLeft = offsetDays * this.grid.dayCellsWidth;
       var eventWidth = eventLength * this.grid.dayCellsWidth;
@@ -21735,17 +21735,17 @@ function (_tsx$Component) {
         daysExceed = -offsetDays;
       }
 
-      if (endDate.isAfter(this.viewEnd)) {
-        daysExceed = Moment.range(this.viewEnd, endDate).diff('days', true);
+      if (endDate.isAfter(this.viewEndDate)) {
+        daysExceed = Moment.range(this.viewEndDate, endDate).diff('days', true);
       }
 
       var locked = this.useLock && this.autoLock && Moment(startDate).isBefore(Moment());
-      var extraClasses = classnames_default()("timeline__event--".concat(type), {
-        'timeline__event--overLeft': offsetDays < 0,
-        'timeline__event--overRight': endDate.isAfter(this.viewEnd),
-        'timeline__event--past': endDate.isBefore(Moment()),
-        'timeline__event--locked': locked,
-        'timeline__event--current': Moment().isBetween(startDate, endDate, 'hour')
+      var extraClasses = classnames_default()("Plantt__event--".concat(type), {
+        'Plantt__event--overLeft': offsetDays < 0,
+        'Plantt__event--overRight': endDate.isAfter(this.viewEndDate),
+        'Plantt__event--past': endDate.isBefore(Moment()),
+        'Plantt__event--locked': locked,
+        'Plantt__event--current': Moment().isBetween(startDate, endDate, 'hour')
       });
 
       if (this.useHours) {
@@ -21757,12 +21757,12 @@ function (_tsx$Component) {
         if (startDate.isSame(endDate, 'day')) {
           eventWidth = this.grid.hourCellsWidth * (eventEndHour - eventStartHour);
         } else {
-          if (startDate.isBefore(this.viewStart, 'day')) {
+          if (startDate.isBefore(this.viewStartDate, 'day')) {
             offsetLeft = 0;
             eventWidth += offsetHours;
           }
 
-          if (endDate.isAfter(this.viewEnd, 'day')) {
+          if (endDate.isAfter(this.viewEndDate, 'day')) {
             daysExceed = Math.floor(daysExceed + 1);
             eventWidth -= offsetHours;
           } else {
@@ -21840,7 +21840,9 @@ function (_tsx$Component) {
 
 __decorate([Prop()], Plantt_Plantt.prototype, "events", void 0);
 
-__decorate([Prop()], Plantt_Plantt.prototype, "viewDates", void 0);
+__decorate([Prop()], Plantt_Plantt.prototype, "viewStart", void 0);
+
+__decorate([Prop()], Plantt_Plantt.prototype, "viewEnd", void 0);
 
 __decorate([Prop()], Plantt_Plantt.prototype, "gridWidth", void 0);
 
