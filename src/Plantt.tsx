@@ -48,8 +48,8 @@ type Grid = {
 
 interface PlanttProps {
     events: PlanttEvent[],
-    viewStart: MomentBase.Moment,
-    viewEnd: MomentBase.Moment,
+    viewStart: Date,
+    viewEnd: Date,
     gridWidth: number,
     linesCount?: number,
     useHours?: boolean,
@@ -72,9 +72,9 @@ const Moment = extendMoment(MomentBase);
 class Plantt extends tsx.Component<PlanttProps> {
     @Prop() events!: PlanttEvent[];
 
-    @Prop() viewStart!: MomentBase.Moment;
+    @Prop() viewStart!: Date;
 
-    @Prop() viewEnd!: MomentBase.Moment;
+    @Prop() viewEnd!: Date;
 
     @Prop() readonly gridWidth!: number;
 
@@ -111,8 +111,8 @@ class Plantt extends tsx.Component<PlanttProps> {
     constructor() {
         super();
 
-        this.viewStartDate = this.viewStart.startOf('day');
-        this.viewEndDate = this.viewEnd.endOf('day');
+        this.viewStartDate = Moment(this.viewStart).startOf('day');
+        this.viewEndDate = Moment(this.viewEnd).endOf('day');
 
         const daysRange = Moment.range(this.viewStartDate, this.viewEndDate);
 
@@ -316,12 +316,12 @@ class Plantt extends tsx.Component<PlanttProps> {
             && Moment(startDate).isBefore(Moment())
         );
 
-        const extraClasses = classnames(`timeline__event--${type}`, {
-            'timeline__event--overLeft': offsetDays < 0,
-            'timeline__event--overRight': endDate.isAfter(this.viewEndDate),
-            'timeline__event--past': endDate.isBefore(Moment()),
-            'timeline__event--locked': locked,
-            'timeline__event--current': Moment().isBetween(startDate, endDate, 'hour'),
+        const extraClasses = classnames(`Plantt__event--${type}`, {
+            'Plantt__event--overLeft': offsetDays < 0,
+            'Plantt__event--overRight': endDate.isAfter(this.viewEndDate),
+            'Plantt__event--past': endDate.isBefore(Moment()),
+            'Plantt__event--locked': locked,
+            'Plantt__event--current': Moment().isBetween(startDate, endDate, 'hour'),
         });
 
         if (this.useHours) {

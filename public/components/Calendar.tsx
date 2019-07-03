@@ -12,32 +12,30 @@ Moment.locale(language);
 class Calendar extends Vue {
     events = getEvents();
 
-    viewStart = Moment().subtract(4, 'days');
-
-    viewEnd = Moment().add(6, 'days');
+    viewDates = {
+        start: Moment().subtract(4, 'days').toDate(),
+        end: Moment().add(6, 'days').toDate(),
+    };
 
     private lastId = 5;
 
-    logDates() {
-        console.log(this.viewStart.format('L'), this.viewEnd.format('L'));
-    }
-
     handlePrevDays(delta = 1) {
-        this.viewStart.subtract(delta, 'days');
-        this.viewEnd.subtract(delta, 'days');
-        this.logDates();
+        const { start, end } = this.viewDates;
+        this.viewDates.start = Moment(start).subtract(delta, 'days').toDate();
+        this.viewDates.end = Moment(end).subtract(delta, 'days').toDate();
+        // this.$refs.Plantt.initGrid();
     }
 
     handleNextDays(delta = 1) {
-        this.viewStart.add(delta, 'days');
-        this.viewEnd.add(delta, 'days');
-        this.logDates();
+        const { start, end } = this.viewDates;
+        this.viewDates.start = Moment(start).add(delta, 'days').toDate();
+        this.viewDates.end = Moment(end).add(delta, 'days').toDate();
     }
 
     handleCenterView(widthDays = 10) {
-        this.viewStart = Moment().subtract(widthDays / 2, 'days');
-        this.viewEnd = Moment().add(widthDays / 2, 'days');
-        this.logDates();
+        const { start, end } = this.viewDates;
+        this.viewDates.start = Moment(start).subtract(widthDays / 2, 'days').toDate();
+        this.viewDates.end = Moment(end).add(widthDays / 2, 'days').toDate();
     }
 
     handleClickAddEvent() {
@@ -54,13 +52,14 @@ class Calendar extends Vue {
         });
     }
 
-    render() {
-        const { events, viewStart, viewEnd } = this;
+    render(): Vue.VNode {
+        const { events } = this;
 
         return (
             <div class="Calendar">
                 <div class="Calendar__toolbar">
-                    <div class="Calendar__toolbar__block">
+                    <div class="Calendar__toolbar__nav">
+                        <span>{Moment(this.viewDates.start).format('L')}</span>
                         <button
                             class="Calendar__btn-prev"
                             onClick={() => this.handlePrevDays(1)}
@@ -79,21 +78,23 @@ class Calendar extends Vue {
                         >
                             {'Next day >'}
                         </button>
+                        <span>{Moment(this.viewDates.end).format('L')}</span>
                     </div>
-                    <div class="Calendar__toolbar__block">
+                    <div class="Calendar__toolbar__actions">
                         <button
                             class="Calendar__btn-add"
                             onClick={this.handleClickAddEvent}
                         >
-                            {'Add random event'}
+                            {'Add random event'} ({this.lastId})
                         </button>
                     </div>
                 </div>
                 <Plantt
+                    ref="Plantt"
                     events={events}
-                    viewStart={viewStart}
-                    viewEnd={viewEnd}
-                    gridWidth={1305}
+                    viewStart={this.viewDates.start}
+                    viewEnd={this.viewDates.end}
+                    gridWidth={880}
                     linesCount={8}
                 />
             </div>
