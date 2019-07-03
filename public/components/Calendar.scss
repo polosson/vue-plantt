@@ -4,8 +4,12 @@
         justify-content: space-between;
         margin-bottom: 2rem;
 
-        &__block {
+        &__nav {
             flex: 1;
+        }
+
+        &__actions {
+            flex: 0 0 auto;
         }
     }
 
@@ -13,12 +17,16 @@
     &__btn-center,
     &__btn-next,
     &__btn-add {
-        margin-left: 5px;
+        margin: 0 5px;
         padding: 7px 10px;
         border: none;
         border-radius: 2px;
         cursor: pointer;
-        background-color: #d74207;
+        background-color: #606b70;
         color: #fff;
+    }
+
+    .Plantt {
+        width: 880px;
     }
 }
